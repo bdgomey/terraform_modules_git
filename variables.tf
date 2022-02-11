@@ -1,19 +1,16 @@
-variable "storage_account_name" {
+variable "name" {
   type = string
 }
-variable "storage_account_resource_group_name" {
+variable "resource_group_name" {
   type = string
 }
-variable "storage_account_location" {
+variable "location" {
   type = string
 }
-variable "storage_account_account_tier" {
+variable "account_tier" {
   type = string
 }
-variable "storage_account_account_replication_type" {
+variable "account_replication_type" {
   type = string
-}
-variable "tags" {
-  type = map(string)
 }
 
