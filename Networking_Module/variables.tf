@@ -1,7 +1,7 @@
 #name of the resource group to be imported
 variable "vnet_name" {
   description = "Name of the vnet to create"
-  type        = strings
+  type        = string
   default     = "acctvnet"
 }
 
