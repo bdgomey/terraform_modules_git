@@ -7,7 +7,7 @@ resource "azurerm_virtual_network" "vnet" {
   resource_group_name = data.azurerm_resource_group.vnet.name
   location = var.vnet_location != null ? var.vnet_location : data.azurerm_resource_group.vnet.location
   address_space = var.address_space
-  dns-servers = var.dns_servers
+  dns_servers = var.dns_servers
   tags = var.tags
 }
 
