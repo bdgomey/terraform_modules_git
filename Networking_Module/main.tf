@@ -3,7 +3,7 @@ data "azurerm_resource_group" "vnet" {
 }
 
 resource "azurerm_network_security_group" "vnet" {
-  name                = var.network_security_group_name 
+  name                = var.network_security_group_name
   resource_group_name  = data.azurerm_resource_group.vnet.name
   location = data.azurerm_resource_group.vnet.location
 }
