@@ -30,3 +30,8 @@ variable "subnet_prefixes" {
   description = "subnet prefixes"
   type        = list(string)
 }
+variable "dns_servers" {
+  description = "The DNS servers to be used with vNet."
+  type        = list(string)
+  default     = []
+}
