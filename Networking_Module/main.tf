@@ -5,7 +5,7 @@ data "azurerm_resource_group" "networking_rg" {
 resource "azurerm_network_security_group" "vnet" {
   name                = var.network_security_group_name 
   resource_group_name  = data.azurerm_resource_group.networking_rg.name
-  location = data.azurerm_resource_group.vnet.location
+  location = data.azurerm_resource_group.networking_rg.location
 }
 
 resource "azurerm_virtual_network" "vnet" {
