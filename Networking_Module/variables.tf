@@ -18,10 +18,6 @@ variable "address_space" {
   description = "vnet address space."
   type        = list(string)
 }
-variable "dns_servers" {
-  description = "dns server address space."
-  type        = list(string)
-}
 variable "subnet_names" {
   description = "subnet names"
   type        = string
