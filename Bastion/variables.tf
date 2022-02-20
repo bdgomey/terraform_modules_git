@@ -1,13 +1,16 @@
 variable "pip_name" {
   type = string
+  default = "bastion_pip"
 }
 
 variable "resource_group_location" {
   type = string
+  default = "eastus"
 }
 
 variable "resource_group_name" {
   type = string
+  default = "bjg_rg"
 }
 
 variable "allocation_method" {
@@ -16,6 +19,7 @@ variable "allocation_method" {
 
 variable "sku" {
   type = string
+  default = "Standard"
 }
 
 variable "bastion_name" {
@@ -24,9 +28,10 @@ variable "bastion_name" {
 
 variable "ip_configuration_name" {
   type = string
+  default = "bastion_pip_configuration"
 }
 
-variable "subnet_id" {
+variable "bastion_subnet_id" {
   type = string
 }
  

@@ -8,8 +8,8 @@ resource "azurerm_public_ip" "pip" {
 
 resource "azurerm_bastion_host" "bastion" {
   name                = var.bastion_name
-  location            = var.resource_group_location
-  resource_group_name = var.resource_group_name
+  location            = azurerm_public_ip.pip.location
+  resource_group_name = azurerm_public_ip.pip.resource_group_name
 
   ip_configuration {
     name                 = var.ip_configuration_name
