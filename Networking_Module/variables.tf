@@ -9,6 +9,11 @@ variable "resource_group_name" {
   type        = string
 }
 
+variable "resource_group_location" {
+  description = "Loacation of the resource group to be imported."
+  type        = string
+}
+
 variable "address_space" {
   type        = list(string)
   description = "The address space that is used by the virtual network."
