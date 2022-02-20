@@ -7,11 +7,13 @@ variable "vnet_name" {
 variable "resource_group_name" {
   description = "Name of the resource group to be imported."
   type        = string
+  default     = "bjg_rg"
 }
 
 variable "resource_group_location" {
   description = "Loacation of the resource group to be imported."
   type        = string
+  default     = "eastus"
 }
 
 variable "address_space" {
@@ -36,7 +38,7 @@ variable "subnet_prefixes" {
 variable "subnet_names" {
   description = "A list of public subnets inside the vNet."
   type        = list(string)
-  default     = ["subnet1", "subnet2", "subnet3"]
+  default     = ["subnet1", "subnet2", "subnet3", "AzureBastionSubnet"]
 }
 
 variable "tags" {
@@ -58,3 +60,33 @@ variable "network_security_group_name" {
   description = "The NSG Name."
   type        = string
 }
+
+variable "pip_name" {
+  type    = string
+  default = "bastion_pip"
+}
+
+variable "allocation_method" {
+  type    = string
+  default = "Static"
+}
+
+variable "sku" {
+  type    = string
+  default = "Standard"
+}
+
+variable "bastion_name" {
+  type = string
+}
+
+variable "ip_configuration_name" {
+  type    = string
+  default = "bastion_pip_configuration"
+}
+
+variable "public_ip_address_id" {
+  type = string
+}
+
+
