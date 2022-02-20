@@ -1,4 +1,4 @@
-data "azurerm_resource_group" "vnet" {
+data "azurerm_resource_group" "networking_rg" {
   name = var.resource_group_name
 }
 
