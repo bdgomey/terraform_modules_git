@@ -48,3 +48,8 @@ variable "vnet_location" {
   type        = string
   default     = null
 }
+
+variable "network_security_group_name" {
+  description = "The NSG Name."
+  type        = string
+}
