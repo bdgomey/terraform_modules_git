@@ -85,8 +85,3 @@ variable "ip_configuration_name" {
   default = "bastion_pip_configuration"
 }
 
-variable "public_ip_address_id" {
-  type = string
-}
-
-
