@@ -13,7 +13,7 @@ resource "azurerm_virtual_network" "vnet" {
   resource_group_name  = data.azurerm_resource_group.vnet.name
   location = var.vnet_location != null ? var.vnet_location: data.azurerm_resource_group.vnet.location
   address_space       = var.address_space
-  #dns_servers         = var.dns_servers
+  dns_servers         = var.dns_servers
 
   tags = var.tags
 }
@@ -23,5 +23,5 @@ resource "azurerm_subnet" "vnet" {
   name                 = var.subnet_names[count.index]
   resource_group_name  = data.azurerm_resource_group.vnet.name
   virtual_network_name = azurerm_virtual_network.vnet.name
-  address_prefixes     = var.subnet_prefixes[count.index]
+  address_prefixes     = [var.subnet_prefixes[count.index]]
 }
