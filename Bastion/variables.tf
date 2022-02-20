@@ -34,7 +34,11 @@ variable "ip_configuration_name" {
 variable "bastion_subnet_id" {
   type = string
 }
- 
+
+variable "public_ip_address_id" {
+  type = string
+}
+
 variable "tags" {
   type = map(string)
 }
