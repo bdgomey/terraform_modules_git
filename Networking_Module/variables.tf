@@ -35,3 +35,6 @@ variable "dns_servers" {
   type        = list(string)
   default     = []
 }
+variable "tags" {
+  type = map(string)
+}
