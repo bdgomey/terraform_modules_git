@@ -84,4 +84,6 @@ variable "ip_configuration_name" {
   type    = string
   default = "bastion_pip_configuration"
 }
-
+variable "availability_set_name" {
+  type    = string
+}

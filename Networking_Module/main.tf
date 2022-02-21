@@ -38,7 +38,13 @@ resource "azurerm_bastion_host" "bastion" {
 
   ip_configuration {
     name                 = var.ip_configuration_name
-    subnet_id            = azurerm_subnet.vnet.3.id
+    subnet_id            = var.subnet_names[count.index] == "AzureBastionSubnet" ? azurerm_subnet.vnet.id : azurerm_subnet.vnet.3.id
     public_ip_address_id = azurerm_public_ip.pip.id
   }
+}
+resource "azurerm_availability_set" "availability_set" {
+  name                = var.availability_set_name
+  location            = azurerm_network_security_group.vnet.location 
+  resource_group_name = azurerm_network_security_group.vnet.resource_group_name
+
 }
