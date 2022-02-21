@@ -20,7 +20,7 @@ resource "azurerm_subnet" "vnet" {
   resource_group_name = var.resource_group_name
   virtual_network_name = azurerm_virtual_network.vnet.name
   name = each.value["name"]
-  address_prefix = each.value["address_prefix"]
+  address_prefixes = each.value["address_prefix"]
 }
 
 resource "azurerm_public_ip" "bastion_pip" {
@@ -33,7 +33,7 @@ resource "azurerm_public_ip" "bastion_pip" {
 
 resource "azurerm_bastion_host" "bastion" {
   name                = var.bastion_name
-  location            = azurerm_public_ip.pip.location
+  location            = azurerm_network_security_group.vnet.location
   resource_group_name = azurerm_network_security_group.vnet.resource_group_name
 
   ip_configuration {
