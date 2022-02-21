@@ -29,17 +29,29 @@ variable "dns_servers" {
   default     = []
 }
 
-variable "subnet_prefixes" {
-  description = "The address prefix to use for the subnet."
-  type        = list(string)
-  default     = ["10.0.1.0/24"]
+variable "subnets" {
+  type = map(any)
+  default = {
+    webserver_subnet = {
+      name             = "webserver"
+      address_prefixes = ["10.0.1.0/24"]
+    }
+    business_subnet = {
+      name             = "business"
+      address_prefixes = ["10.0.2.0/24"]
+    }
+    database_subnet = {
+      name             = "database"
+      address_prefixes = ["10.0.3.0/24"]
+    }
+    # The name must be AzureBastionSubnet
+    AzureBastionSubnet = {
+      name             = "AzureBastionSubnet"
+      address_prefixes = ["10.0.4.0/24"]
+    }
+  }
 }
 
-variable "subnet_names" {
-  description = "A list of public subnets inside the vNet."
-  type        = list(string)
-  default     = ["subnet1", "subnet2", "subnet3", "AzureBastionSubnet"]
-}
 
 variable "tags" {
   description = "The tags to associate with your network and subnets."

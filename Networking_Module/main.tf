@@ -16,14 +16,14 @@ resource "azurerm_virtual_network" "vnet" {
 }
 
 resource "azurerm_subnet" "vnet" {
-  count                = length(var.subnet_names)
-  name                 = var.subnet_names[count.index]
-  resource_group_name  = azurerm_network_security_group.vnet.resource_group_name
+  for_each = var.subnets
+  resource_group_name = var.resource_group_name
   virtual_network_name = azurerm_virtual_network.vnet.name
-  address_prefixes     = [var.subnet_prefixes[count.index]]
+  name = each.value["name"]
+  address_prefix = each.value["address_prefix"]
 }
 
-resource "azurerm_public_ip" "pip" {
+resource "azurerm_public_ip" "bastion_pip" {
   name                = var.pip_name
   location            = azurerm_network_security_group.vnet.location
   resource_group_name = azurerm_network_security_group.vnet.resource_group_name
@@ -38,8 +38,8 @@ resource "azurerm_bastion_host" "bastion" {
 
   ip_configuration {
     name                 = var.ip_configuration_name
-    subnet_id            = azurerm_subnet.vnet.3.name
-    public_ip_address_id = azurerm_public_ip.pip.id
+    subnet_id            = azurerm_subnet.vnet["AzureBastionSubnet"]
+    public_ip_address_id = azurerm_public_ip.bastion_pip.id
   }
 }
 resource "azurerm_availability_set" "availability_set" {
