@@ -22,7 +22,12 @@ resource "azurerm_subnet" "vnet" {
   virtual_network_name = azurerm_virtual_network.vnet.name
   address_prefixes     = [var.subnet_prefixes[count.index]]
 }
-
+output "subnet_names" {
+  value = {
+    for name in keys(var.subnet_names) : name => azurerm_subnet.vnet[id].name
+  }
+  description = "list of subnet names"
+}
 resource "azurerm_public_ip" "pip" {
   name                = var.pip_name
   location            = azurerm_network_security_group.vnet.location
@@ -37,9 +42,8 @@ resource "azurerm_bastion_host" "bastion" {
   resource_group_name = azurerm_network_security_group.vnet.resource_group_name
 
   ip_configuration {
-    count                = length(var.subnet_names)
     name                 = var.ip_configuration_name
-    subnet_id            = var.subnet_names[count.index] == "AzureBastionSubnet" ? azurerm_subnet.vnet[count.index].id : azurerm_subnet.vnet.3.id
+    subnet_id            = output.subnet_names == "AzureBastionSubnet" ? azurerm_subnet.vnet.id : null
     public_ip_address_id = azurerm_public_ip.pip.id
   }
 }
