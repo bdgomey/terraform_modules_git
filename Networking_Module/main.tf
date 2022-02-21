@@ -19,8 +19,8 @@ resource "azurerm_subnet" "subnet" {
   for_each = var.subnets
   resource_group_name = var.resource_group_name
   virtual_network_name = azurerm_virtual_network.vnet.name
-  name = each.value["name"]
-  address_prefixes = each.value["address_prefix"]
+  name = each.key.name
+  address_prefixes = each.key.address_prefix
 }
 
 resource "azurerm_public_ip" "bastion_pip" {
@@ -38,7 +38,7 @@ resource "azurerm_bastion_host" "bastion" {
 
   ip_configuration {
     name                 = var.ip_configuration_name
-    subnet_id            = azurerm_subnet.subnet["AzureBastionSubnet"].id
+    subnet_id            = azurerm_subnet.subnet[AzureBastionSubnet].id
     public_ip_address_id = azurerm_public_ip.bastion_pip.id
   }
 }
