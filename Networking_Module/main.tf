@@ -15,12 +15,12 @@ resource "azurerm_virtual_network" "vnet" {
   tags = var.tags
 }
 
-resource "azurerm_subnet" "subnet" {
-  for_each = var.subnets
-  resource_group_name = var.resource_group_name
+resource "azurerm_subnet" "subnets" {
+  for_each             = var.subnets 
+  resource_group_name  = var.resource_group_name
   virtual_network_name = azurerm_virtual_network.vnet.name
-  name = each.value.name
-  address_prefixes = each.value.address_prefix
+  name                 = each.value.name
+  address_prefixes     = each.value.address_prefix
 }
 
 resource "azurerm_public_ip" "bastion_pip" {
@@ -38,13 +38,13 @@ resource "azurerm_bastion_host" "bastion" {
 
   ip_configuration {
     name                 = var.ip_configuration_name
-    subnet_id            = azurerm_subnet.subnet[AzureBastionSubnet].id
+    subnet_id            = azurerm_subnet.subnets["AzureBastionSubnet"].id
     public_ip_address_id = azurerm_public_ip.bastion_pip.id
   }
 }
 resource "azurerm_availability_set" "availability_set" {
   name                = var.availability_set_name
-  location            = azurerm_network_security_group.vnet.location 
+  location            = azurerm_network_security_group.vnet.location
   resource_group_name = azurerm_network_security_group.vnet.resource_group_name
 
 }

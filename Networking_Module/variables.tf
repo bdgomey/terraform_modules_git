@@ -30,28 +30,11 @@ variable "dns_servers" {
 }
 
 variable "subnets" {
-  type = map(any)
-  default = {
-    webserver_subnet = {
-      name             = "webserver"
-      address_prefixes = ["10.0.1.0/24"]
-    }
-    business_subnet = {
-      name             = "business"
-      address_prefixes = ["10.0.2.0/24"]
-    }
-    database_subnet = {
-      name             = "database"
-      address_prefixes = ["10.0.3.0/24"]
-    }
-    # The name must be AzureBastionSubnet
-    AzureBastionSubnet = {
-      name             = "AzureBastionSubnet"
-      address_prefixes = ["10.0.4.0/24"]
-    }
-  }
+ type = map(object({
+   name = string
+   address_prefix   = list(string)
+ }))
 }
-
 
 variable "tags" {
   description = "The tags to associate with your network and subnets."
